@@ -16,9 +16,8 @@ suspend fun checkUserExistence(user: User): UserWithoutPassword? {
             apiPath = "usercheck",
             body = Json.encodeToString(user).encodeToByteArray()
         )
-        Json.decodeFromString<UserWithoutPassword>(result.toString())
+        result?.decodeToString()?.let { Json.decodeFromString<UserWithoutPassword>(it) }
     } catch (e: Exception) {
-        println("CURRENT_USER")
         println(e.message)
         null
     }
