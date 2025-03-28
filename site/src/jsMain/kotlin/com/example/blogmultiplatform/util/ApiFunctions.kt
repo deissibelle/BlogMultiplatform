@@ -23,15 +23,16 @@ suspend fun checkUserExistence(user: User): UserWithoutPassword? {
     }
 }
 
-//suspend fun checkUserId(id: String): Boolean {
-//    return try {
-//        window.api.tryPost(
-//            apiPath = "checkuserid",
-//            body = Json.encodeToString(id).encodeToByteArray()
-//        )?.decodeToString().parseData()
-//    } catch (e: Exception) {
-//        println(e.message.toString())
-//        false
-//    }
-//}
+suspend fun checkUserId(id: String): Boolean {
+    return try {
+        val result = window.api.tryPost(
+            apiPath = "checkuserid",
+            body = Json.encodeToString(id).encodeToByteArray()
+        )
+        result?.decodeToString()?.let { Json.decodeFromString<Boolean>(it)}?:false
+    } catch (e: Exception) {
+        println(e.message.toString())
+        false
+    }
+}
 
