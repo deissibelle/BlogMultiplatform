@@ -9,12 +9,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.example.blogmultiplatform.models.Theme
+import com.example.blogmultiplatform.navigation.Screen
 import com.example.blogmultiplatform.styles.NavigationItemStyle
 import com.example.blogmultiplatform.util.Constants.COLLAPSED_PANEL_HEIGHT
 import com.example.blogmultiplatform.util.Constants.FONT_FAMILY
 import com.example.blogmultiplatform.util.Constants.SIDE_PANEL_WIDTH
 import com.example.blogmultiplatform.util.Id
 import com.example.blogmultiplatform.util.Res
+import com.example.blogmultiplatform.util.logout
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.ScrollBehavior
@@ -110,36 +112,36 @@ fun NavigationItems() {
     NavigationItem(
         modifier = Modifier.margin(bottom = 24.px),
         title = "Home",
-        selected = true,
+        selected = context.route.path == Screen.AdminHome.route,
         icon = Res.PathIcon.home,
         onClick = {
-//            context.router.navigateTo(Screen.AdminHome.route)
+            context.router.navigateTo(Screen.AdminHome.route)
         }
     )
     NavigationItem(
         modifier = Modifier.margin(bottom = 24.px),
-//        selected = context.route.path == Screen.AdminCreate.route,
+        selected = context.route.path == Screen.AdminCreate.route,
         title = "Create Post",
         icon = Res.PathIcon.create,
         onClick = {
-//            context.router.navigateTo(Screen.AdminCreate.route)
+            context.router.navigateTo(Screen.AdminCreate.route)
         }
     )
     NavigationItem(
         modifier = Modifier.margin(bottom = 24.px),
-//        selected = context.route.path == Screen.AdminMyPosts.route,
+        selected = context.route.path == Screen.AdminMyPosts.route,
         title = "My Posts",
         icon = Res.PathIcon.posts,
         onClick = {
-//            context.router.navigateTo(Screen.AdminMyPosts.route)
+            context.router.navigateTo(Screen.AdminMyPosts.route)
         }
     )
     NavigationItem(
         title = "Logout",
         icon = Res.PathIcon.logout,
         onClick = {
-//            logout()
-//            context.router.navigateTo(Screen.AdminLogin.route)
+            logout()
+            context.router.navigateTo(Screen.AdminLogin.route)
         }
     )
 }

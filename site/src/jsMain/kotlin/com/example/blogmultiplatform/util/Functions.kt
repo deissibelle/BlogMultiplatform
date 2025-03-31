@@ -6,6 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.example.blogmultiplatform.navigation.Screen
+
 
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -15,7 +17,6 @@ import com.varabyte.kobweb.core.rememberPageContext
 import kotlinx.browser.localStorage
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
-import org.w3c.dom.Screen
 import org.w3c.dom.get
 import org.w3c.dom.set
 import kotlin.js.Date
@@ -30,7 +31,7 @@ fun isUserLoggedIn(content: @Composable () -> Unit) {
     LaunchedEffect(key1 = Unit) {
         userIdExists = if (!userId.isNullOrEmpty()) checkUserId(id = userId) else false
         if (!remembered || !userIdExists) {
-            context.router.navigateTo("/admin/login")
+            context.router.navigateTo(Screen.AdminLogin.route)
         }
     }
 
@@ -41,23 +42,23 @@ fun isUserLoggedIn(content: @Composable () -> Unit) {
     }
 }
 
-//fun logout() {
-//    localStorage["remember"] = "false"
-//    localStorage["userId"] = ""
-//    localStorage["username"] = ""
-//}
-//
-//fun Modifier.noBorder(): Modifier {
-//    return this.border(
-//        width = 0.px,
-//        style = LineStyle.None,
-//        color = Colors.Transparent
-//    ).outline(
-//        width = 0.px,
-//        style = LineStyle.None,
-//        color = Colors.Transparent
-//    )
-//}
+fun logout() {
+    localStorage["remember"] = "false"
+    localStorage["userId"] = ""
+    localStorage["username"] = ""
+}
+
+fun Modifier.noBorder(): Modifier {
+    return this.border(
+        width = 0.px,
+        style = LineStyle.None,
+        color = Colors.Transparent
+    ).outline(
+        width = 0.px,
+        style = LineStyle.None,
+        color = Colors.Transparent
+    )
+}
 
 //fun getEditor() = document.getElementById(Id.editor) as HTMLTextAreaElement
 //
