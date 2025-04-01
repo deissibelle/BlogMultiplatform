@@ -238,7 +238,7 @@ private fun CollapsedSidePanel(onMenuClick: () -> Unit) {
 @Composable
 fun OverflowSidePanel(
     onMenuClose: () -> Unit,
-    content: @Composable () -> Unit
+
 ) {
     val context = rememberPageContext()
     val scope = rememberCoroutineScope()
@@ -303,13 +303,15 @@ fun OverflowSidePanel(
                 Image(
                     modifier = Modifier
                         .width(80.px)
-//                        .onClick { context.router.navigateTo(Screen.HomePage.route) }
+                        .onClick { context.router.navigateTo(Screen.AdminHome.route) }
                         .cursor(Cursor.Pointer),
                     src = Res.Image.logo,
                     alt = "Logo Image"
                 )
+
             }
-            content()
+            NavigationItems()
+
         }
     }
 }
