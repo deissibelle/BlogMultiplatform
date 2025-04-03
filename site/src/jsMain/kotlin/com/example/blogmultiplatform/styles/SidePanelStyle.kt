@@ -3,7 +3,6 @@ package com.example.blogmultiplatform.styles
 import com.example.blogmultiplatform.models.Theme
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.silk.style.CssStyle
-//import com.example.shared.JsTheme
 import com.example.blogmultiplatform.util.Id
 import com.varabyte.kobweb.compose.css.TransitionProperty
 import com.varabyte.kobweb.compose.ui.Modifier

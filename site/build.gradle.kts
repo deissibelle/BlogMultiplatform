@@ -44,7 +44,13 @@ kotlin {
     sourceSets {
 //        commonMain.dependencies {
 //          // Add shared dependencies between JS and JVM here
-//        }
+        val commonMain by getting {
+            dependencies {
+//                implementation(compose.runtime)
+                implementation(libs.kotlinx.serialization)
+//                implementation(project(":shared"))
+            }
+        }
         jsMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.html.core)

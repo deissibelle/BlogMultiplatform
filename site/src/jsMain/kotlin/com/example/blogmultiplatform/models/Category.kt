@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 actual enum class Category(val color: String) {
     Technology(color=Theme.Green.hex),
     Programming(color=Theme.Yellow.hex),
-    Design(color=Theme.Pupple.hex)
+    Design(color=Theme.Purple.hex)
 }

@@ -7,8 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.example.blogmultiplatform.components.AdminPageLayout
-import com.example.blogmultiplatform.components.OverflowSidePanel
-import com.example.blogmultiplatform.components.SidePanel
 import com.example.blogmultiplatform.models.RandomJoke
 import com.example.blogmultiplatform.models.Theme
 import com.example.blogmultiplatform.navigation.Screen

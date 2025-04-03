@@ -42,11 +42,19 @@ enum class Theme (
         hex = "#FFEC45",
         rgb = rgb(r=255,g=236,b=69)
     ),
-    Red(
-        hex = "#FF6359",
-        rgb = rgb(r=255,g=99,b=89)
+    Gray(
+        hex = "#E9E9E9",
+        rgb = rgb(r=233,g=233,b=233)
     ),
-    Pupple(
+    DarkGray(
+        hex = "#646464",
+        rgb = rgb(r=100,g=100,b=100)
+    ),
+//    Red(
+//        hex = "#FF6359",
+//        rgb = rgb(r=255,g=99,b=89)
+//    ),
+    Purple(
         hex = "#8B6DFF",
         rgb = rgb(r=139,g=109,b=255)
     ),
