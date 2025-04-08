@@ -50,10 +50,14 @@ enum class Theme (
         hex = "#646464",
         rgb = rgb(r=100,g=100,b=100)
     ),
-//    Red(
-//        hex = "#FF6359",
-//        rgb = rgb(r=255,g=99,b=89)
-//    ),
+    Red(
+        hex = "#FF6359",
+        rgb = rgb(r=255,g=99,b=89)
+    ),
+    Tertiary(
+        hex = "#FF6359",
+        rgb = rgb(r=255,g=99,b=89)
+    ),
     Purple(
         hex = "#8B6DFF",
         rgb = rgb(r=139,g=109,b=255)

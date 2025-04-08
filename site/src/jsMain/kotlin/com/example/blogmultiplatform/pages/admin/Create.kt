@@ -1,6 +1,7 @@
 package com.example.blogmultiplatform.pages.admin
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -9,9 +10,12 @@ import androidx.compose.runtime.setValue
 import com.example.blogmultiplatform.components.AdminPageLayout
 import com.example.blogmultiplatform.components.ControlPopup
 import com.example.blogmultiplatform.components.MessagePopup
+import com.example.blogmultiplatform.models.ApiResponse
+import com.example.blogmultiplatform.models.Constants.POST_ID_PARAM
 import com.example.blogmultiplatform.models.ControlStyle
 import com.example.blogmultiplatform.models.EditorControl
 import com.example.blogmultiplatform.models.Post
+import com.example.blogmultiplatform.models.Theme
 import com.example.blogmultiplatform.navigation.Screen
 import com.example.blogmultiplatform.styles.EditorKeyStyle
 import com.example.blogmultiplatform.util.Constants.FONT_FAMILY
@@ -20,6 +24,7 @@ import com.example.blogmultiplatform.util.Id
 import com.example.blogmultiplatform.util.addPost
 import com.example.blogmultiplatform.util.applyControlStyle
 import com.example.blogmultiplatform.util.applyStyle
+import com.example.blogmultiplatform.util.fetchSelectedPost
 import com.example.blogmultiplatform.util.getEditor
 import com.example.blogmultiplatform.util.getSelectedText
 import com.example.blogmultiplatform.util.isUserLoggedIn
@@ -52,6 +57,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
+import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.margin
@@ -67,9 +73,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.visibility
 import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
-import com.example.blogmultiplatform.models.Category
-import com.example.blogmultiplatform.models.Constants.POST_ID_PARAM
-import com.example.blogmultiplatform.models.Theme
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.forms.Switch
 import com.varabyte.kobweb.silk.components.forms.SwitchSize
@@ -77,9 +80,9 @@ import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
-import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
+import com.example.blogmultiplatform.models.Category
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import kotlinx.browser.document
 import kotlinx.browser.localStorage
 import kotlinx.coroutines.delay
@@ -98,7 +101,6 @@ import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.HTMLTextAreaElement
 import org.w3c.dom.get
 import kotlin.js.Date
-
 
 
 data class CreatePageUiState(
@@ -135,17 +137,17 @@ data class CreatePageUiState(
         imagePopup = false
     )
 }
+
 @Page
 @Composable
-fun CreatePage(){
+fun CreatePage() {
     isUserLoggedIn {
         CreateScreen()
     }
 }
 
 @Composable
-fun CreateScreen(){
-
+fun CreateScreen() {
     val scope = rememberCoroutineScope()
     val context = rememberPageContext()
     val breakpoint = rememberBreakpoint()
@@ -153,6 +155,32 @@ fun CreateScreen(){
 
     val hasPostIdParam = remember(key1 = context.route) {
         context.route.params.containsKey(POST_ID_PARAM)
+    }
+
+    LaunchedEffect(hasPostIdParam) {
+        if (hasPostIdParam) {
+            val postId = context.route.params[POST_ID_PARAM] ?: ""
+            val response = fetchSelectedPost(id = postId)
+            if (response is ApiResponse.Success) {
+                (document.getElementById(Id.editor) as HTMLTextAreaElement).value =
+                    response.data.content
+                uiState = uiState.copy(
+                    id = response.data._id,
+                    title = response.data.title,
+                    subtitle = response.data.subtitle,
+                    content = response.data.content,
+                    category = response.data.category,
+                    thumbnail = response.data.thumbnail,
+                    buttonText = "Update",
+                    main = response.data.main,
+                    popular = response.data.popular,
+                    sponsored = response.data.sponsored
+                )
+            }
+        } else {
+            (document.getElementById(Id.editor) as HTMLTextAreaElement).value = ""
+            uiState = uiState.reset()
+        }
     }
 
     AdminPageLayout {
@@ -292,7 +320,6 @@ fun CreateScreen(){
                             .color(Theme.HalfBlack.rgb),
                         text = "Paste an Image URL instead"
                     )
-
                 }
                 ThumbnailUploader(
                     thumbnail = uiState.thumbnail,
@@ -424,11 +451,7 @@ fun CreateScreen(){
             }
         )
     }
-
-
 }
-
-
 
 @Composable
 fun CategoryDropdown(
@@ -720,4 +743,5 @@ fun CreateButton(
             .toAttrs()
     ) {
         SpanText(text = text)
-    }}
+    }
+}
