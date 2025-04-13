@@ -1,5 +1,3 @@
-@file:Suppress("UNREACHABLE_CODE")
-
 package com.example.blogmultiplatform.components
 
 import androidx.compose.runtime.Composable
@@ -17,29 +15,31 @@ import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import org.jetbrains.compose.web.css.px
 
 @Composable
-fun AdminPageLayout(content: @Composable ()->Unit){
-    var overflowMenuOpened by remember { mutableStateOf(false) }
-    Box (
+fun AdminPageLayout(content: @Composable () -> Unit) {
+    var overflowOpened by remember { mutableStateOf(false) }
+    Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
-    ){
+    ) {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .maxWidth(PAGE_WIDTH.px)
         ) {
             SidePanel(onMenuClick = {
-                overflowMenuOpened =true
-
+                overflowOpened = true
             })
-            if (overflowMenuOpened){
+            if (overflowOpened) {
                 OverflowSidePanel(
                     onMenuClose = {
-                        overflowMenuOpened = false
+                        overflowOpened = false
                     },
+                    content = {
+                        NavigationItems()
+                    }
                 )
             }
             content()
-
         }
     }
 }

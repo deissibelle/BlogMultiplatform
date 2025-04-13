@@ -55,8 +55,12 @@ enum class Theme (
         rgb = rgb(r=255,g=99,b=89)
     ),
     Tertiary(
-        hex = "#FF6359",
-        rgb = rgb(r=255,g=99,b=89)
+        hex = "#001925",
+        rgb = rgb(r=250,g=250,b=250)
+    ),
+    Sponsored(
+        hex = "#001925",
+        rgb = rgb(r=250,g=250,b=250)
     ),
     Purple(
         hex = "#8B6DFF",
