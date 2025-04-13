@@ -66,7 +66,7 @@ fun SearchBar(
                 )
                 .padding(left = 20.px)
                 .height(54.px)
-                .backgroundColor(if (darkTheme) Theme.Primary.rgb else Theme.LightGray.rgb)
+                .backgroundColor(if (darkTheme) Theme.Tertiary.rgb else Theme.LightGray.rgb)
                 .borderRadius(r = 100.px)
                 .border(
                     width = 2.px,
@@ -92,7 +92,7 @@ fun SearchBar(
                 attrs = Modifier
                     .id(Id.adminSearchBar)
                     .fillMaxSize()
-                    .color(if (darkTheme) Colors.White else Colors.Black)
+                    .color(if (darkTheme) Colors.Black else Colors.White)
                     .backgroundColor(Colors.Transparent)
                     .noBorder()
                     .onFocusIn { focused = true }
