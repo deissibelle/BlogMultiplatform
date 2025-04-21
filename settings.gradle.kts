@@ -1,6 +1,8 @@
 pluginManagement {
     repositories {
         gradlePluginPortal()
+        google()
+        mavenCentral()
     }
 }
 
@@ -28,4 +30,4 @@ gradle.settingsEvaluated {
 rootProject.name = "blogmultiplatform"
 
 include(":site")
-
+include(":androidapp")

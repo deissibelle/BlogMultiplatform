@@ -1,6 +1,7 @@
 package com.example.blogmultiplatform.data
 
 import com.example.blogmultiplatform.models.Category
+import com.example.blogmultiplatform.models.Newsletter
 import com.example.blogmultiplatform.models.Post
 import com.example.blogmultiplatform.models.PostWithoutDetails
 import com.example.blogmultiplatform.models.User
@@ -19,5 +20,5 @@ interface MongoRepository {
     suspend fun readSelectedPost(id: String): Post
     suspend fun checkUserExistence(user: User): User?
     suspend fun checkUserId(id: String): Boolean
-//    suspend fun subscribe(newsletter: Newsletter): String
+    suspend fun subscribe(newsletter: Newsletter): String
 }
