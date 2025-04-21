@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.mongodb.realm)
+    alias(libs.plugins.serialization.plugin)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -49,11 +51,12 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
+
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.coroutines)
+    implementation(libs.mongodb.sync)
+    implementation(libs.coil.compose)
+    implementation(libs.kotlinx.serialization)
+//    implementation(project(":shared"))
+
 }
