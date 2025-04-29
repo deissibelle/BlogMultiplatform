@@ -1,9 +1,14 @@
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
-    alias(libs.plugins.mongodb.realm)
     alias(libs.plugins.serialization.plugin)
     alias(libs.plugins.compose.compiler)
+    id("org.jetbrains.kotlin.kapt")
+}
+repositories {
+    google()
+    mavenCentral()
+    maven("https://maven.mongodb.com/repo")
 }
 
 android {
@@ -19,6 +24,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    kotlin {
+        jvmToolchain(17)
+    }
+
 
     buildTypes {
         release {
@@ -35,6 +44,8 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+        languageVersion = "1.9"
+
     }
     buildFeatures {
         compose = true
@@ -54,9 +65,12 @@ dependencies {
 
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.coroutines)
-    implementation(libs.mongodb.sync)
     implementation(libs.coil.compose)
     implementation(libs.kotlinx.serialization)
-//    implementation(project(":shared"))
+    implementation(project(":shared"))
+
+    // CouchBase
+    implementation(libs.couchbase.lite)
+
 
 }

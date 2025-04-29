@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
     }
 }
 
@@ -31,3 +32,4 @@ rootProject.name = "blogmultiplatform"
 
 include(":site")
 include(":androidapp")
+include(":shared")
